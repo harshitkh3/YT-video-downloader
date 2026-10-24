@@ -8,8 +8,8 @@ from pathlib import Path
 # Base backend directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Downloads directory
-DOWNLOADS_DIR = BASE_DIR / "downloads"
+# Downloads directory (supports Cloud Run /tmp or custom mounts)
+DOWNLOADS_DIR = Path(os.environ.get("DOWNLOADS_DIR", str(BASE_DIR / "downloads")))
 DOWNLOADS_DIR.mkdir(parents=True, exist_ok=True)
 
 # Allowed CORS origins (development + container defaults)
